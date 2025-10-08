@@ -77,12 +77,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-        app/src/app_main.c
         startup_stm32l432xx.s  # Add the startup file
-
-        fhnw_lib/fonts.c
-        fhnw_lib/ssd1306.c
-        fhnw_lib/TLV320AIC23B.c
 )
 
 add_subdirectory(fhnw_lib)

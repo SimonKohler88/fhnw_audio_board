@@ -5,6 +5,9 @@
 #include "app_main.h"
 #include "ssd1306.h"
 #include "fonts.h"
+#include "tlv_control.h"
+
+TLV_CTRL_t tlv_ctrl;
 
 void setup(void) {
     SSD1306_Init() ;
@@ -12,6 +15,8 @@ void setup(void) {
     SSD1306_GotoXY(10,5);
     SSD1306_Puts("FU", &Font_16x26, SSD1306_COLOR_WHITE);
     SSD1306_UpdateScreen();
+    
+    tlv_ctrl_init(&tlv_ctrl);
 }
 
 void mainloop(void) {

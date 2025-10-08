@@ -9,23 +9,24 @@ extern I2C_HandleTypeDef hi2c1;
  ***************************************************************************/
 
 const uint16_t TLV320_init_data[10] = {
+
 	// *** Define belwo the value of each register ***
-				// Reg 00: Left Line In (6dB, mute OFF)
-				// Reg 01: Right Line In (6dB, mute OFF)
-				// Reg 02: Left Headphone out (-12dB)
-				// Reg 03: Right Headphone out (-12dB)
-				// Reg 04: Analog Audio Path Control (DAC sel, Mute Mic)
-				// Reg 05: Digital Audio Path Control
-				// Reg 06: Power Down Control (All ON)
-				// Reg 07: Digital Audio Interface Format (I2S, 16-bit, slave)
+	(0b11011) | (0 << TLV320_LEFT_IN_LIM_Pos),			// Reg 00: Left Line In (6dB, mute OFF)
+	(0b11011) | (0 << TLV320_RIGHT_IN_LIM_Pos),		// Reg 01: Right Line In (6dB, mute OFF)
+	0x0000,			// Reg 02: Left Headphone out (-12dB)
+	0x0000,			// Reg 03: Right Headphone out (-12dB)
+	0x0000,			// Reg 04: Analog Audio Path Control (DAC sel, Mute Mic)
+	0x0000,			// Reg 05: Digital Audio Path Control
+	0x0000,			// Reg 06: Power Down Control (All ON)
+	0x0000,			// Reg 07: Digital Audio Interface Format (I2S, 16-bit, slave)
 #if CODEC_SAMPLE_RATE == 96000
-				// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 96k ADC/DAC)
+	0x0000,			// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 96k ADC/DAC)
 #elif CODEC_SAMPLE_RATE == 48000
-				// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 48k ADC/DAC)
+	0x0000,			// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 48k ADC/DAC)
 #elif CODEC_SAMPLE_RATE == 32000
-				// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 32k ADC/DAC)
+	0x0000,			// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 32k ADC/DAC)
 #elif CODEC_SAMPLE_RATE == 8000
-				// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 8k ADC/DAC)
+	0x0000,			// Reg 08: Sampling Control (Clock Out divided by 1, 256x, 8k ADC/DAC)
 #else
 		#error "sample rate must be in {8000, 32000, 48000, 96000}"
 #endif
