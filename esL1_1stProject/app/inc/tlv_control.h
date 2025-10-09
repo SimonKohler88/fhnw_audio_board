@@ -6,16 +6,18 @@
 #define ESL1_1STPROJECT_TLV_CONTROL_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-typedef struct {
-    // Empty struct for now
-} TLV_CTRL_t;
+    typedef struct
+    {
+        // Empty struct for now
+    } TLV_CTRL_t;
 
-void tlv_ctrl_init(TLV_CTRL_t* ctrl);
+    void tlv_ctrl_init( TLV_CTRL_t* ctrl );
 
 #ifdef __cplusplus
 }
 #endif
-#endif //ESL1_1STPROJECT_TLV_CONTROL_H
+#endif  // ESL1_1STPROJECT_TLV_CONTROL_H
