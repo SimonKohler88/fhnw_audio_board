@@ -64,6 +64,7 @@ enable_language(C CXX ASM)
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME}
+#        Drivers/CMSIS/DSP/Source/FilteringFunctions/arm_fir_q15.c
 )
 
 # Add STM32CubeMX generated sources
@@ -89,19 +90,35 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
         app/inc
         fhnw_lib
+        # CMSIS includes
+        Drivers/CMSIS/Include
+        Drivers/CMSIS/Device/ST/STM32L4xx/Include
+        Drivers/CMSIS/DSP/Include
+        Drivers/CMSIS/Lib/GCC
 )
 
 # Add project symbols (macros)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined symbols
+    ARM_MATH_CM4
+    ARM_MATH_DSP
 )
 
 # Remove wrong libob.a library dependency when using cpp files
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 
+# Link directories setup
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
+        # Add user defined library search paths
+        Drivers/CMSIS/DSP/Lib/GCC
+)
+
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
+    arm_cortexM4lf_math
+        m
+#        libarm_cortexM4lf_math
 
     # Add user defined libraries
 )

@@ -107,9 +107,9 @@ int main(void)
   MX_I2C1_Init();
   MX_SAI1_Init();
   /* USER CODE BEGIN 2 */
+  setup();
   HAL_SAI_Transmit_DMA(&hsai_BlockA1, (uint8_t*) saiTx_buf, SAI_BUF_LEN);
   HAL_SAI_Receive_DMA(&hsai_BlockB1, (uint8_t*) saiRx_buf, SAI_BUF_LEN);
-  setup();
   /* USER CODE END 2 */
 
   /* Infinite loop */

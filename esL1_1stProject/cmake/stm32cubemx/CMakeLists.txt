@@ -92,3 +92,42 @@ set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES ${
 if((CMAKE_C_STANDARD EQUAL 90) OR (CMAKE_C_STANDARD EQUAL 99))
     message(ERROR "Generated code requires C11 or higher")
 endif()
+
+# Add include paths
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user defined include paths
+        app/inc
+        fhnw_lib
+        Drivers/CMSIS/DSP/Include
+)
+
+# Add project symbols (macros)
+target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user defined symbols
+    ARM_MATH_CM4
+    ARM_MATH_MATRIX_CHECK
+    ARM_MATH_ROUNDING
+)
+
+# CMSIS-DSP Library sources
+file(GLOB CMSIS_DSP_SOURCES
+    "Drivers/CMSIS/DSP/Source/BasicMathFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/CommonTables/*.c"
+    "Drivers/CMSIS/DSP/Source/ComplexMathFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/ControllerFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/FastMathFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/FilteringFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/MatrixFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/StatisticsFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/SupportFunctions/*.c"
+    "Drivers/CMSIS/DSP/Source/TransformFunctions/*.c"
+)
+
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${CMSIS_DSP_SOURCES})
+
+# Add linked libraries
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    stm32cubemx
+
+    # Add user defined libraries
+)
