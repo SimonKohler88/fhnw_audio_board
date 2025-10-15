@@ -13,7 +13,6 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
 
-
 # specify cross-compilers and tools
 #set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 #set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
@@ -44,9 +43,9 @@ add_link_options(-T ${LINKER_SCRIPT})
 #                           -specs=nosys.specs\
 
 # Define the build type
-if(NOT CMAKE_BUILD_TYPE)
+if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug")
-endif()
+endif ()
 
 # Set the project name
 set(CMAKE_PROJECT_NAME esL1_1stProject)
@@ -64,7 +63,7 @@ enable_language(C CXX ASM)
 
 # Create an executable object type
 add_executable(${CMAKE_PROJECT_NAME}
-#        Drivers/CMSIS/DSP/Source/FilteringFunctions/arm_fir_q15.c
+        #        Drivers/CMSIS/DSP/Source/FilteringFunctions/arm_fir_q15.c
 )
 
 # Add STM32CubeMX generated sources
@@ -72,12 +71,12 @@ add_subdirectory(cmake/stm32cubemx)
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined library search paths
+        # Add user defined library search paths
 )
 
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user sources here
+        # Add user sources here
         startup_stm32l432xx.s  # Add the startup file
 )
 
@@ -87,7 +86,7 @@ add_subdirectory(app)
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined include paths
+        # Add user defined include paths
         app/inc
         fhnw_lib
         # CMSIS includes
@@ -99,9 +98,9 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add project symbols (macros)
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
-    # Add user defined symbols
-    ARM_MATH_CM4
-    ARM_MATH_DSP
+        # Add user defined symbols
+        ARM_MATH_CM4
+        ARM_MATH_DSP
 )
 
 # Remove wrong libob.a library dependency when using cpp files
@@ -115,12 +114,9 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add linked libraries
 target_link_libraries(${CMAKE_PROJECT_NAME}
-    stm32cubemx
-    arm_cortexM4lf_math
+        stm32cubemx
+        arm_cortexM4lf_math
         m
-#        libarm_cortexM4lf_math
-
-    # Add user defined libraries
 )
 
 #add_compile_options(-mcpu=cortex-m4 -mthumb -mthumb-interwork)
